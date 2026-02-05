@@ -1,159 +1,312 @@
-// app/page.js
-'use client';
+// "use client";
+// import React, { useEffect, useState } from "react";
+// import { motion } from "framer-motion";
+// import { FaInstagram, FaFacebookF, FaWhatsapp, FaUsers } from "react-icons/fa";
 
-import React, { useRef } from 'react';
-import { motion, useSpring, useTransform, useMotionValue } from 'framer-motion';
-import pic from '../../public/assets/perfume.png'
-import Image from 'next/image';
+// const socials = [
+//   { icon: <FaInstagram />, link: "https://www.instagram.com/scent.avenue_/", name: "Instagram" },
+//   { icon: <FaFacebookF />, link: "https://www.facebook.com/scentavenueofficial", name: "Facebook" },
+//   { icon: <FaWhatsapp />, link: "https://wa.me/923702205204", name: "WhatsApp" },
+//   { icon: <FaUsers />, link: "https://chat.whatsapp.com/EgGetSaOrkKJXysQ7o6zPo", name: "The Club" },
+// ];
 
-export default function ScentAvenueUltimate() {
-  const containerRef = useRef(null);
+// // Background Particles Component
+// const Particles = () => {
+//   return (
+//     <div className="absolute inset-0 overflow-hidden pointer-events-none">
+//       {[...Array(20)].map((_, i) => (
+//         <motion.div
+//           key={i}
+//           className="absolute bg-yellow-600/20 rounded-full"
+//           style={{
+//             width: Math.random() * 4 + "px",
+//             height: Math.random() * 4 + "px",
+//             left: Math.random() * 100 + "%",
+//             top: Math.random() * 100 + "%",
+//           }}
+//           animate={{
+//             y: [0, -100, 0],
+//             x: [0, Math.random() * 50 - 25, 0],
+//             opacity: [0, 0.8, 0],
+//           }}
+//           transition={{
+//             duration: Math.random() * 10 + 10,
+//             repeat: Infinity,
+//             ease: "linear",
+//           }}
+//         />
+//       ))}
+//     </div>
+//   );
+// };
 
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
+// export default function RunningAnimationPage() {
+//   return (
+//     <div className="relative min-h-screen bg-[#030303] text-white flex flex-col items-center justify-center overflow-hidden">
+      
+//       {/* 1. Background Running Particles */}
+//       <Particles />
 
-  const handleMouseMove = (e) => {
-    const { clientX, clientY } = e;
-    const { innerWidth, innerHeight } = window;
-    mouseX.set(clientX / innerWidth - 0.5);
-    mouseY.set(clientY / innerHeight - 0.5);
-  };
+//       {/* 2. Infinite Running Text (Marquee) */}
+//       <div className="absolute top-1/4 w-full overflow-hidden opacity-5 select-none pointer-events-none">
+//         <motion.div 
+//           animate={{ x: ["0%", "-50%"] }}
+//           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+//           className="flex whitespace-nowrap text-[15vh] font-black uppercase tracking-tighter"
+//         >
+//           <span>Scent Avenue • Signature Fragrance • Luxury Essence •&nbsp;</span>
+//           <span>Scent Avenue • Signature Fragrance • Luxury Essence •&nbsp;</span>
+//         </motion.div>
+//       </div>
 
-  const springConfig = { damping: 25, stiffness: 150 };
-  const bottleX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-30, 30]), springConfig);
-  const bottleY = useSpring(useTransform(mouseY, [-0.5, 0.5], [-30, 30]), springConfig);
-  const bottleRotate = useSpring(useTransform(mouseX, [-0.5, 0.5], [-10, 10]), springConfig);
+//       {/* 3. Main Content Section */}
+//       <div className="z-10 text-center px-4">
+//         <motion.div
+//           initial={{ opacity: 0, scale: 0.9 }}
+//           animate={{ opacity: 1, scale: 1 }}
+//           transition={{ duration: 1.5 }}
+//         >
+//           <motion.p 
+//             animate={{ opacity: [0.4, 1, 0.4] }}
+//             transition={{ duration: 3, repeat: Infinity }}
+//             className="uppercase tracking-[0.8em] text-[10px] md:text-xs text-yellow-700 mb-6"
+//           >
+//             The Wait is Almost Over
+//           </motion.p>
+          
+//           <h1 className="text-5xl md:text-[120px] font-serif italic mb-2 tracking-tighter">
+//             Coming <span className="relative">
+//               Soon
+//               <motion.div 
+//                 className="absolute bottom-4 left-0 h-[2px] bg-yellow-700"
+//                 initial={{ width: 0 }}
+//                 animate={{ width: "100%" }}
+//                 transition={{ delay: 1, duration: 2 }}
+//               />
+//             </span>
+//           </h1>
+//         </motion.div>
 
-  return (
-    <div 
-      onMouseMove={handleMouseMove}
-      className="h-screen bg-[#030303] text-white overflow-hidden selection:bg-[#c5a15c] selection:text-black cursor-none relative"
-    >
-      <style jsx global>{`
-        body { overflow: hidden; }
-        ::-webkit-scrollbar { display: none; }
-        * { -ms-overflow-style: none; scrollbar-width: none; }
-        .font-black { text-shadow: 0 0 20px rgba(197, 161, 92, 0.05); }
-      `}</style>
+//         {/* 4. Animated CTA Button */}
+//         <motion.div 
+//           className="mt-16 relative inline-block group"
+//           whileHover={{ scale: 1.05 }}
+//         >
+//           <a 
+//             href="https://chat.whatsapp.com/EgGetSaOrkKJXysQ7o6zPo"
+//             className="relative z-20 px-10 py-4 bg-transparent border border-white/20 backdrop-blur-sm text-[10px] tracking-[0.4em] uppercase font-bold block transition-all group-hover:border-yellow-700"
+//           >
+//             Enter The Club
+//           </a>
+//           {/* Running Border Animation around button */}
+//           <motion.div 
+//             className="absolute -inset-[2px] border border-yellow-700 opacity-0 group-hover:opacity-100 rounded-sm"
+//             animate={{ rotate: 360 }}
+//             transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+//           />
+//         </motion.div>
+//       </div>
 
-      {/* --- CUSTOM CURSOR --- */}
-      <motion.div 
-        style={{ x: useSpring(useMotionValue(0)), y: useSpring(useMotionValue(0)) }}
-        className="fixed w-4 h-4 bg-[#c5a15c] rounded-full pointer-events-none z-[100] mix-blend-difference"
-      />
+//       {/* 5. Social Media - Bottom Dock */}
+//       <motion.div 
+//         initial={{ y: 50, opacity: 0 }}
+//         animate={{ y: 0, opacity: 1 }}
+//         transition={{ delay: 1, duration: 1 }}
+//         className="absolute bottom-10 flex gap-6 px-6 py-3 bg-white/5 backdrop-blur-xl rounded-full border border-white/10"
+//       >
+//         {socials.map((social, i) => (
+//           <motion.a
+//             key={i}
+//             href={social.link}
+//             target="_blank"
+//             whileHover={{ y: -5, scale: 1.2, color: "#b45309" }}
+//             className="text-xl transition-colors cursor-pointer"
+//             title={social.name}
+//           >
+//             {social.icon}
+//           </motion.a>
+//         ))}
+//       </motion.div>
 
-      {/* --- AMBIENT MIST --- */}
-      <div className="absolute inset-0 z-0 opacity-40">
-        {[...Array(15)].map((_, i) => (
+//       {/* 6. Floating Name Side-Decor */}
+//       <div className="absolute right-10 top-1/2 -rotate-90 origin-right hidden lg:block">
+//         <div className="flex items-center gap-4">
+//           <div className="h-[1px] w-20 bg-yellow-700/50 animate-pulse"></div>
+//           <p className="text-[10px] tracking-[0.5em] uppercase text-white/30">
+//             SCENT AVENUE OFFICIAL
+//           </p>
+//         </div>
+//       </div>
+
+//     </div>
+//   );
+// }
+
+
+
+
+
+  "use client";
+  import React from "react";
+  import { motion } from "framer-motion";
+  import { FaInstagram, FaFacebookF, FaWhatsapp, FaUsers } from "react-icons/fa";
+
+  const socials = [
+    { icon: <FaInstagram />, link: "https://www.instagram.com/scent.avenue_/", name: "Instagram" },
+    { icon: <FaFacebookF />, link: "https://www.facebook.com/scentavenueofficial", name: "Facebook" },
+    { icon: <FaWhatsapp />, link: "https://wa.me/923702205204", name: "WhatsApp" },
+    { icon: <FaUsers />, link: "https://chat.whatsapp.com/EgGetSaOrkKJXysQ7o6zPo", name: "The Club" },
+  ];
+
+  // Background Particles (Running Animation)
+  const Particles = () => {
+    return (
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute bg-gradient-to-t from-[#c5a15c]/20 to-transparent blur-xl rounded-full"
+            className="absolute bg-yellow-600/20 rounded-full"
             style={{
-              width: Math.random() * 300 + 100 + "px",
-              height: Math.random() * 300 + 100 + "px",
+              width: Math.random() * 4 + "px",
+              height: Math.random() * 4 + "px",
               left: Math.random() * 100 + "%",
               top: Math.random() * 100 + "%",
             }}
             animate={{
-              y: [0, -50, 0],
-              opacity: [0.2, 0.5, 0.2],
-              scale: [1, 1.1, 1],
+              y: [0, -120, 0],
+              x: [0, Math.random() * 40 - 20, 0],
+              opacity: [0, 0.6, 0],
             }}
             transition={{
-              duration: Math.random() * 10 + 5,
+              duration: Math.random() * 10 + 10,
               repeat: Infinity,
-              ease: "easeInOut",
+              ease: "linear",
             }}
           />
         ))}
       </div>
+    );
+  };
 
-      {/* --- TOP HUD --- */}
-      <header className="fixed top-0 w-full z-50 p-10 flex justify-between items-start pointer-events-none">
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
-          <h2 className="text-[10px] tracking-[0.8em] uppercase text-[#c5a15c] font-bold">Scent Avenue</h2>
-          <p className="text-[8px] tracking-[0.4em] text-gray-500 uppercase mt-2 font-mono font-light">A way to your fragrance</p>
-        </motion.div>
-        <div className="text-[9px] tracking-[0.5em] uppercase text-gray-400 border-b border-gray-800 pb-2 pointer-events-auto cursor-pointer hover:text-white transition-colors">
-          The Unveiling 2026
+  export default function ScentAvenueComingSoon() {
+    return (
+      <div className="relative min-h-screen bg-[#030303] text-white flex flex-col items-center justify-center overflow-hidden font-sans">
+        
+        {/* 1. Background Running Particles */}
+        <Particles />
+
+        {/* 2. Infinite Running Marquee Text */}
+        <div className="absolute top-1/4 w-full overflow-hidden opacity-[0.03] select-none pointer-events-none">
+          <motion.div 
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            className="flex whitespace-nowrap text-[18vh] font-black uppercase tracking-tighter"
+          >
+            <span>Scent Avenue • Signature Fragrance • Luxury Essence •&nbsp;</span>
+            <span>Scent Avenue • Signature Fragrance • Luxury Essence •&nbsp;</span>
+          </motion.div>
         </div>
-      </header>
 
-      {/* --- MAIN STAGE --- */}
-      <main className="relative z-10 h-full flex items-center justify-center">
-        <motion.div 
-          style={{ x: useTransform(mouseX, [-0.5, 0.5], [50, -50]) }}
-          className="absolute text-[22vw] font-serif font-black text-[#111] leading-none select-none italic pointer-events-none"
-        >
-          AVENUE
-        </motion.div>
+        {/* 3. Main Brand Content */}
+        <div className="z-10 text-center px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.5 }}
+          >
+            {/* Brand Name Small */}
+            <h2 className="text-yellow-700 tracking-[0.6em] uppercase text-[10px] md:text-xs mb-4 font-bold">
+              Scent Avenue Official
+            </h2>
 
-        {/* HERO PRODUCT IMAGE */}
-        <motion.div 
-          style={{ x: bottleX, y: bottleY, rotate: bottleRotate }}
-          className="relative w-[70vw] h-[70vh] md:w-[35vw] md:h-[65vh] flex items-center justify-center p-8" // Padding added to prevent clipping
-        >
-          <div className="absolute inset-0 bg-[#c5a15c]/10 blur-[120px] rounded-full scale-75" />
-          
-          <div className="relative z-20 w-full h-full scale-[1.3] "> {/* Slight scale down for safety */}
-            <Image 
-              src={pic}
-              alt="Scent Avenue"
-              fill
-              className="object-contain drop-shadow-[0_10px_60px_rgba(197,161,92,0.2)]"
-              priority
-              unoptimized 
-            />
-          </div>
+            <motion.p 
+              animate={{ opacity: [0.4, 1, 0.4] }}
+              transition={{ duration: 3, repeat: Infinity }}
+              className="text-neutral-400 text-xs md:text-sm uppercase tracking-[0.3em] mb-8"
+            >
+              Something Exquisite is being Bottled
+            </motion.p>
+            
+            {/* Main Title */}
+            <h1 className="text-6xl md:text-[130px] font-serif italic mb-6 tracking-tighter leading-none">
+              Coming <span className="relative inline-block text-yellow-600">
+                Soon
+                <motion.div 
+                  className="absolute -bottom-2 left-0 h-[2px] bg-yellow-700"
+                  initial={{ width: 0 }}
+                  animate={{ width: "100%" }}
+                  transition={{ delay: 1, duration: 1.5 }}
+                />
+              </span>
+            </h1>
 
-          <div className="absolute inset-0 flex flex-col items-center justify-center border border-white/5 bg-black/40 backdrop-blur-md rounded-[40px] p-12 text-center z-10 opacity-0 hover:opacity-100 transition-opacity duration-500">
-            <span className="text-[9px] tracking-[1em] text-[#c5a15c] uppercase mb-6">AI Synthetic Luxury</span>
-            <div className="h-[1px] w-12 bg-gray-800 mb-6"></div>
-            <p className="text-gray-400 text-[10px] tracking-widest leading-loose uppercase italic">
-              Experience the convergence of algorithm and olfaction.
+            <p className="max-w-md mx-auto text-neutral-500 text-xs md:text-sm leading-relaxed tracking-widest uppercase opacity-80 mb-12">
+              Experience the art of fine fragrance. <br /> 
+              Launching our exclusive collection shortly.
             </p>
+          </motion.div>
+
+          {/* 4. Animated CTA Button */}
+          <motion.div 
+            className="relative inline-block group"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <a 
+              href="https://chat.whatsapp.com/EgGetSaOrkKJXysQ7o6zPo"
+              className="relative z-20 px-12 py-5 bg-transparent border border-yellow-700/30 backdrop-blur-sm text-[10px] tracking-[0.5em] uppercase font-bold block transition-all group-hover:border-yellow-600 group-hover:bg-yellow-700 group-hover:text-black"
+            >
+              Join The Avenue C ommunity
+            </a>
+            {/* Rotating Border Effect */}
+            <motion.div 
+              className="absolute -inset-[3px] border-t border-b border-yellow-600 opacity-0 group-hover:opacity-100 rounded-sm"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+            />
+          </motion.div>
+        </div>
+
+        {/* 5. Social Media - Bottom Navigation */}
+        <motion.div 
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 1.2, duration: 1 }}
+          className="absolute bottom-12 flex flex-col items-center gap-6"
+        >
+          <div className="flex gap-10 px-8 py-4 bg-white/[0.03] backdrop-blur-2xl rounded-full border border-white/10 shadow-2xl">
+            {socials.map((social, i) => (
+              <motion.a
+                key={i}
+                href={social.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ y: -5, scale: 1.3, color: "#b45309" }}
+                className="text-xl md:text-2xl text-neutral-400 transition-colors cursor-pointer"
+                title={social.name}
+              >
+                {social.icon}
+              </motion.a>
+            ))}
           </div>
         </motion.div>
 
-        {/* BOTTOM CONTENT */}
-        <div className="absolute bottom-16 w-full px-10 md:px-20 flex flex-col md:flex-row justify-between items-end">
-          <motion.div 
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 1.5 }}
-            className="flex flex-col gap-4"
-          >
-            <div className="flex gap-2 items-center">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#c5a15c] animate-pulse" />
-              <span className="text-[10px] tracking-widest text-gray-500 uppercase font-light">System Status: Distilling...</span>
-            </div>
-            <h3 className="text-xl md:text-2xl font-light tracking-wide text-gray-300 font-serif">A new dimension of scent <br/> is arriving.</h3>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2 }}
-            className="mt-10 md:mt-0 w-full md:w-80 pointer-events-auto cursor-auto"
-          >
-            <div className="relative border-b border-gray-800 py-3 group focus-within:border-[#c5a15c] transition-colors">
-              <input 
-                type="email" 
-                placeholder="ENTER EMAIL FOR EARLY ACCESS" 
-                className="bg-transparent border-none outline-none w-full text-[10px] tracking-[0.4em] uppercase placeholder:text-gray-700 focus:placeholder:text-gray-400"
-              />
-              <motion.button 
-                whileHover={{ scale: 1.1, color: "#fff" }}
-                className="absolute right-0 text-[#c5a15c] text-[10px] tracking-widest font-bold uppercase transition-colors"
-              >
-                Join
-              </motion.button>
-            </div>
-          </motion.div>
+        {/* 6. Vertical Side Decor */}
+        <div className="absolute left-10 top-1/2 -rotate-90 origin-left hidden lg:block opacity-20">
+          <p className="text-[9px] tracking-[1.2em] uppercase whitespace-nowrap">
+            The Signature Experience
+          </p>
         </div>
-      </main>
 
-      <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-[90] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-    </div>
-  );
-}
+        <div className="absolute right-10 top-1/2 rotate-90 origin-right hidden lg:block">
+          <div className="flex items-center gap-4">
+            <p className="text-[10px] tracking-[0.5em] uppercase text-white/30">
+              Pakistan &nbsp; | &nbsp; 2026
+            </p>
+            <div className="h-[1px] w-16 bg-yellow-700/50 animate-pulse"></div>
+          </div>
+        </div>
+
+      </div>
+    );
+  }
