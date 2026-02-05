@@ -256,7 +256,7 @@
               href="https://chat.whatsapp.com/EgGetSaOrkKJXysQ7o6zPo"
               className="relative z-20 px-12 py-5 bg-transparent border border-yellow-700/30 backdrop-blur-sm text-[10px] tracking-[0.5em] uppercase font-bold block transition-all group-hover:border-yellow-600 group-hover:bg-yellow-700 group-hover:text-black"
             >
-              Join The Avenue C ommunity
+              Join The Avenue Community
             </a>
             {/* Rotating Border Effect */}
             <motion.div 
